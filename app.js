@@ -1,35 +1,23 @@
 const ADSReadSymbol = require("./src/adsReadSymbol");
 const PDFCreator = require("./src/pdfCreator");
+const yargs = require("yargs/yargs");
+const { hideBin } = require("yargs/helpers");
 
-const args = process.argv.slice(2);
-
-const pdfPath = args[0];
-const templatePath = args[1];
-const variable = args[2];
-const address = args[3] || '127.0.0.1.1.1';
-const port = args[4] || 851;
-
-if (!pdfPath) {
-  console.error('Error: PDF path is not provided. Exiting...');
-  process.exit(1);
-}
-
-if (!templatePath) {
-  console.error('Error: Template path is not provided. Exiting...');
-  process.exit(1);
-}
-
-if (!variable) {
-  console.error('Error: Variable name is not provided. Exiting...');
-  process.exit(1);
-}
+const argv = yargs(hideBin(process.argv))
+  .option("pdfPath", { alias: "p", type: "string", demandOption: true, description: "The path to the PDF file." })
+  .option("templatePath", { alias: "t", type: "string", demandOption: true, description: "The path to the template file." })
+  .option("variable", { alias: "v", type: "string", demandOption: true, description: "The variable." })
+  .option("address", { alias: "a", type: "string", default: '127.0.0.1.1.1', description: "The address." })
+  .option("port", { alias: "r", type: "number", default: 851, description: "The port." })
+  .help()
+  .argv;
 
 async function makePdfFromSymbol () {
-  const pdf = new PDFCreator(pdfPath, templatePath);
+  const pdf = new PDFCreator(argv.pdfPath, argv.templatePath);
   const data = await ADSReadSymbol.getValueFromClient(
-    variable,
-    address,
-    port
+    argv.variable,
+    argv.address,
+    argv.port
   );
 
   await pdf.create(data);

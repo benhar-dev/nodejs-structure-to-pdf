@@ -64,8 +64,14 @@ The program takes the following arguments:
 
 You can run the program via npm:
 
+Using full names
 ```bash
-npm start "C:/temp/myPdf.pdf" "C:/temp/template.json" "Main.myVariable" "127.0.0.1.1.1" 851
+node app.js --pdfPath "C:/temp/myPdf.pdf" --templatePath "C:/temp/template.json" --variable "Main.myVariable" --address "127.0.0.1.1.1" --port 851
+```
+Using alias
+
+```bash
+node app.js -p "C:/temp/myPdf.pdf" -t "C:/temp/template.json" -v "Main.myVariable" -a "127.0.0.1.1.1" -r 851
 ```
 
 ## License
