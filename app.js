@@ -25,7 +25,7 @@ if (!variable) {
 }
 
 async function makePdfFromSymbol () {
-  const pdf = new PDFCreator("C:/temp/myPdf.pdf", "C:/temp/Template.json");
+  const pdf = new PDFCreator(pdfPath, templatePath);
   const data = await ADSReadSymbol.getValueFromClient(
     variable,
     address,
