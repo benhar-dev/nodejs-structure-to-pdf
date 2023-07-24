@@ -1,0 +1,11 @@
+{
+    "content": [
+        {
+            "text": "The value of myString was <%= MyString %> and the value of myInt was <%= MyInt %>."
+        },
+        {
+            "text": "Further styling found here.",
+            "link": "http://pdfmake.org/playground.html"
+        }
+    ]
+}

@@ -1,11 +1,11 @@
 {
   "name": "nodejs-structure-to-pdf",
   "version": "1.0.0",
-  "description": "Sample application which will convert a structure to a PDF",
-  "main": "index.js",
+  "description": "Sample application which will convert a PLC structure variable to a PDF",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js"
-  },
+    "start": "node app.js \"C:/temp/myPdf.pdf\" \"C:/temp/template.json\" \"Main.myVariable\" \"127.0.0.1.1.1\" 851"
+   },
   "author": "",
   "license": "MIT",
   "dependencies": {
