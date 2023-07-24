@@ -74,5 +74,17 @@ Using alias
 node app.js -p "C:/temp/myPdf.pdf" -t "C:/temp/template.json" -v "Main.myVariable" -a "127.0.0.1.1.1" -r 851
 ```
 
+Getting help
+```bash
+node app.js --help
+Options:
+      --version       Show version number                              [boolean]
+  -p, --pdfPath       The path to the PDF file.              [string] [required]
+  -t, --templatePath  The path to the template file.         [string] [required]
+  -v, --variable      The variable.                          [string] [required]
+  -a, --address       The address.           [string] [default: "127.0.0.1.1.1"]
+  -r, --port          The port.                          [number] [default: 851]
+      --help          Show help                                        [boolean]
+```
 ## License
 This project is licensed under the terms of the MIT license.
