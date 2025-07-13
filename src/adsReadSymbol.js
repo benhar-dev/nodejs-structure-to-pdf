@@ -1,18 +1,21 @@
 const ads = require("ads-client");
 
 module.exports = class ADSReadSymbol {
-  static async getValueFromClient(VariableName, NetId, Port) {
-    const client = ADSReadSymbol.createAdsClient(NetId, Port);
+  static async getValueFromClient(variableName, netId, port) {
+    const client = ADSReadSymbol.createAdsClient(netId, port);
     await client.connect();
-    const response = await client.readSymbol(VariableName);
-    await client.disconnect();
-    return response.value;
+    try {
+      const response = await client.readSymbol(variableName);
+      return response.value;
+    } finally {
+      await client.disconnect();
+    }
   }
 
-  static createAdsClient(NetId, Port) {
+  static createAdsClient(netId, port) {
     return new ads.Client({
-      targetAmsNetId: NetId,
-      targetAdsPort: Port,
+      targetAmsNetId: netId,
+      targetAdsPort: port,
     });
   }
 };
