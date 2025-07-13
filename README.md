@@ -17,7 +17,7 @@ in perpetuity.
 
 ## Overview
 
-This is a simle example of fetching and processing data from a PLC structure variable, and subsequently transforming this data into a PDF document. The core functionality involves accessing a specific PLC variable via its name, attempting to apply the contents of this variable to a predefined template, and, upon successful integration, generating a PDF output. 
+This is a simple example of fetching and processing data from a PLC structure variable, and subsequently transforming this data into a PDF document. The core functionality involves accessing a specific PLC variable via its name, attempting to apply the contents of this variable to a predefined template, and, upon successful integration, generating a PDF output.
 
 ## Screenshot
 
@@ -56,7 +56,7 @@ There's a copy of template.json in the template folder. Make sure to use it as t
 ### Run the program
 The program takes the following arguments:
 
-1. pdfPath : The path to the output PDF file.|
+1. pdfPath : The path to the output PDF file.
 2. templatePath: the path to the JSON template file.
 3. variable: the name of the PLC structure variable to read.
 4. netId (optional): the ADS Net ID of the PLC, defaults to 127.0.0.1.1.1.
