@@ -17,7 +17,10 @@ in perpetuity.
 
 ## Overview
 
-This is a simple example of fetching and processing data from a PLC structure variable, and subsequently transforming this data into a PDF document. The core functionality involves accessing a specific PLC variable via its name, attempting to apply the contents of this variable to a predefined template, and, upon successful integration, generating a PDF output.
+This tool reads a PLC structure variable using ADS, applies its contents to a PDF template, and outputs a nicely formatted document.  
+It’s ideal for generating reports, logs, or forms directly from structured PLC data.
+
+An example of the output can be found [here](./output/report.pdf)
 
 ## Screenshot
 
@@ -27,64 +30,77 @@ This is a simple example of fetching and processing data from a PLC structure va
 
 ### Dependencies
 
-This project uses:
+- Node.js (v18.16.1 or later recommended)
+- TwinCAT 4024.65 or later
 
-* Node.js (v18.16.1 or later recommended)
-* TwinCAT 4024.47
+---
 
 ### Installation
 
-Clone the repo
-
 ```bash
 git clone https://github.com/benhar-dev/nodejs-structure-to-pdf.git
-```
-
-Install NPM packages
-```bash
 cd nodejs-structure-to-pdf
 npm install
 ```
+
+---
+
 ## Usage
 
-### Prepare the TwinCAT program
-Make sure the TwinCAT runtime is installed and running. There's a TwinCAT example project included in the twincat folder of this project for your reference.
+### 1. Prepare the TwinCAT program
 
-### Prepare the Template
-There's a copy of template.json in the template folder. Make sure to use it as the template for creating your PDF.
+Make sure the TwinCAT runtime is running. A sample project is included under the `twincat/` folder.
 
-### Run the program
-The program takes the following arguments:
+### 2. Prepare the template
 
-1. pdfPath : The path to the output PDF file.
-2. templatePath: the path to the JSON template file.
-3. variable: the name of the PLC structure variable to read.
-4. netId (optional): the ADS Net ID of the PLC, defaults to 127.0.0.1.1.1.
-5. port (optional): the ADS port, defaults to 851.
+Edit `./template/template.json` to define the layout and data bindings for your report.  
+You can use Lodash-style syntax like `<%= myValue %>` for variables.
 
-You can run the program via npm:
-
-Using full names
-```bash
-node app.js --pdfPath "C:/temp/myPdf.pdf" --templatePath "C:/temp/template.json" --variable "Main.myVariable" --address "127.0.0.1.1.1" --port 851
-```
-Using alias
+### 3. Run the program
 
 ```bash
-node app.js -p "C:/temp/myPdf.pdf" -t "C:/temp/template.json" -v "Main.myVariable" -a "127.0.0.1.1.1" -r 851
+# Using default template and output paths
+npm start
 ```
 
-Getting help
+By default, the program will:
+
+- Read from `./template/template.json`
+- Write output to `./output/report.pdf`
+- Use `127.0.0.1.1.1:851` as the ADS target
+
+#### Optional full usage:
+
+```bash
+node app.js \
+  --pdfPath "./output/custom-report.pdf" \
+  --templatePath "./template/template.json" \
+  --variable "Main.myReport" \
+  --address "127.0.0.1.1.1" \
+  --port 851
+```
+
+#### Shorthand version:
+
+```bash
+node app.js -p "./output/custom-report.pdf" -t "./template/template.json" -v "Main.myReport" -a "127.0.0.1.1.1" -r 851
+```
+
+### CLI Help
+
 ```bash
 node app.js --help
-Options:
-      --version       Show version number                              [boolean]
-  -p, --pdfPath       The path to the PDF file.              [string] [required]
-  -t, --templatePath  The path to the template file.         [string] [required]
-  -v, --variable      The variable.                          [string] [required]
-  -a, --address       The address.           [string] [default: "127.0.0.1.1.1"]
-  -r, --port          The port.                          [number] [default: 851]
-      --help          Show help                                        [boolean]
 ```
-## License
-This project is licensed under the terms of the MIT license.
+
+Outputs:
+
+```
+Options:
+  -p, --pdfPath       Output PDF path [default: ./output/report.pdf]
+  -t, --templatePath  Template JSON path [default: ./template/template.json]
+  -v, --variable      PLC structure variable name (e.g. Main.myReport) [required]
+  -a, --address       ADS Net ID [default: 127.0.0.1.1.1]
+  -r, --port          ADS Port [default: 851]
+  --help              Show help
+  --version           Show version
+```

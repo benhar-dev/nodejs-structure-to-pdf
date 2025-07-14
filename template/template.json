@@ -1,11 +1,107 @@
 {
-    "content": [
-        {
-            "text": "The value of myString was <%= MyString %> and the value of myInt was <%= MyInt %>."
-        },
-        {
-            "text": "Further styling found here.",
-            "link": "http://pdfmake.org/playground.html"
-        }
-    ]
+  "content": [
+    {
+      "text": "Example Report",
+      "style": "h1"
+    },
+    {
+      "text": "PLC Variables",
+      "style": "h2"
+    },
+    {
+      "text": "The value of the ExampleString was '<%= ExampleString %>' and the value of ExampleInt was <%= ExampleInt %>."
+    },
+
+    {
+      "text": "Data as Tables",
+      "style": "h2"
+    },
+    {
+      "text": "This table is rendered using dynamic values from a PLC structure (i.e. ExampleTable)."
+    },
+    {
+      "table": {
+        "headerRows": 1,
+        "widths": ["*", "*"],
+        "body": [
+          ["Name", "Value"]
+          <% _.forEach(ExampleTable, function(row) { %>,
+          ["<%= row.Name %>", <%= row.Value %>]
+          <% }); %>
+        ]
+      },
+      "layout": "lightHorizontalLines",
+      "margin": [0, 10, 0, 20]
+    },
+    {
+      "text": "Inbuilt Font Styles",
+      "style": "h2"
+    },
+    {
+      "table": {
+        "headerRows": 1,
+        "widths": ["30%", "*"],
+        "body": [
+          ["Style", "Example"],
+          ["Normal", { "text": "This is normal text" }],
+          ["Bold", { "text": "This is bold text", "bold": true }],
+          ["Italic", { "text": "This is italic text", "italics": true }],
+          ["Bold Italic", { "text": "This is bold italic text", "bold": true, "italics": true }],
+          ["Code", { "text": "const x = 42;", "style": "code" }]
+        ]
+      },
+      "layout": "lightHorizontalLines",
+      "margin": [0, 10, 0, 20]
+    },
+    {
+      "text": "Further Information",
+      "style": "h2"
+    },
+   {
+      "text": [
+        "This tool uses ",
+        { "text": "lodash", "bold": true },
+        " and ",
+        { "text": "pdfmake", "bold": true },
+        " to generate PDF files from template-based structures. For full styling capabilities, refer to the official guide below."
+      ],
+      "margin": [0, 0, 0, 6]
+    },
+    {
+      "text": "PDFMake Styling Reference",
+      "link": "http://pdfmake.org/playground.html",
+      "style": "hyperlink"
+    }
+  ],
+  "styles": {
+    "h1": {
+      "fontSize": 18,
+      "bold": true,
+      "margin": [0, 16, 0, 6]
+    },
+    "h2": {
+      "fontSize": 14,
+      "bold": true,
+      "margin": [0, 12, 0, 4]
+    },
+    "hyperlink": {
+      "decoration": "underline",
+      "color": "blue"
+    },
+    "code": {
+      "font": "FiraCode",
+      "fontSize": 10,
+      "margin": [0, 4, 0, 4],
+      "color": "#333333",
+      "background": "#f2f2f2",
+      "lineHeight": 1.2,
+      "preserveLeadingSpaces": true
+    },
+    "body": {
+      "font": "Roboto"
+    },
+    "fallback": {
+      "font": "Arial"
+    }
+  }
 }

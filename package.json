@@ -4,11 +4,12 @@
   "description": "Sample application which will convert a PLC structure variable to a PDF",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js -p \"C:/temp/myPdf.pdf\" -t \"C:/temp/template.json\" -v \"Main.myVariable\" -a \"127.0.0.1.1.1\" -r 851"
-  },  
+    "start": "node app.js -v \"Main.myReport\""
+  },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@fontsource/fira-code": "^5.2.6",
     "ads-client": "^1.14.2",
     "lodash": "^4.17.21",
     "pdfmake": "^0.2.7",

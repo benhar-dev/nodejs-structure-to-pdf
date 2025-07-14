@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <DUT Name="MyReport" Id="{2deca53a-0dba-4cc3-9c30-650cf2d50bab}">
+    <Declaration><![CDATA[TYPE MyReport :
+STRUCT
+	ExampleString : STRING := 'This is a test string';
+	ExampleInt : INT := 12345;
+	ExampleTable : ARRAY [0..2] OF ExampleTableRow
+		:= [(
+			Name:='Example row 1',
+			Value:=123
+		),(
+			Name:='Example row 2',
+			Value:=456
+		),(
+			Name:='Example row 3',
+			Value:=789
+		)];
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
